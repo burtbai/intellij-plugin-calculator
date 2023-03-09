@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.burtbai.calculator.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.burtbai.calculator.MyBundle
 
 class MyApplicationService {
 
