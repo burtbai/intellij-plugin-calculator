@@ -1,18 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.burtbai.calculator</id>
-    <name>IntelliJ Platform Plugin Calculator</name>
-    <vendor>burtbai</vendor>
+    <name>Calculator</name>
+    <vendor email="burtbai@hotmail.com" url="https://github.com/burtbai">burtbai</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.burtbai.calculator.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.burtbai.calculator.services.MyProjectService"/>
+        <toolWindow id="Calculator" secondary="true" anchor="left" icon="/icons/calculator.svg"
+                    factoryClass="com.github.burtbai.calculator.CalculatorPlugin"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.burtbai.calculator.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
