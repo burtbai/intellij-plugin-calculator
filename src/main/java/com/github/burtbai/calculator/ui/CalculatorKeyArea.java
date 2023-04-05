@@ -1,10 +1,9 @@
 package com.github.burtbai.calculator.ui;
 
+import com.github.burtbai.calculator.icons.CalculatorIcons;
 import com.github.burtbai.calculator.message.CalculatorBundle;
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.ui.laf.darcula.ui.DarculaTextFieldUI;
 import org.mariuszgromada.math.mxparser.Expression;
-import org.mariuszgromada.math.mxparser.License;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,12 +22,12 @@ public class CalculatorKeyArea extends JPanel {
     // 表达式, 输入行
     private JTextField TF_expression = new JTextField("");
     // 结果, 输出行
-    private JTextField TF_result = new JTextField("");
+    private JTextField TF_result = new TextFieldWithIcon(AllIcons.Vcs.Equal);
 
     // 第1行
     private JButton B_copy = new JButton(AllIcons.Actions.Copy); // 复制输入输出
-    private JButton B_clear = new JButton("C"); // 清空输入输出
-    private JButton B_backspace = new JButton(AllIcons.Actions.Back); // 退格，清除输入的最后一位
+    private JButton B_clear = new JButton(AllIcons.Actions.GC); // 清空输入输出
+    private JButton B_backspace = new JButton(CalculatorIcons.Backspace); // 退格，清除输入的最后一位
     // 第2行
     private JButton B_random = new JButton("Random"); // 随机变量, U{0,10²}
     private JButton B_pow = new JButton("x^n"); // x的n次方
@@ -59,68 +58,73 @@ public class CalculatorKeyArea extends JPanel {
     private JButton B_point = new JButton("."); // 小数点
     private JButton B_equal = new JButton("="); // 等号
 
-
     public CalculatorKeyArea() {
-        License.iConfirmNonCommercialUse("burtbai");
+        Font font = this.getFont();
 
         this.setLayout(gridBagLayout); // 窗体对象设置为GridBagLayout布局
         gridBagConstraints.fill = GridBagConstraints.BOTH; // 该方法是为了设置如果组件所在的区域比组件本身要大时的显示情况
 
-        int y = 0;
+        int row = 0;
+        int maxCol = 4;
 
-        setControl(TF_expression, 0, y, 4, 1);
+        setControl(TF_expression, 0, row, maxCol, 2);
         TF_expression.setHorizontalAlignment(JTextField.RIGHT);
-        TF_expression.setUI(new DarculaTextFieldUI());
+        TF_expression.setFont(new Font(font.getName(), font.getStyle(), font.getSize() * 2));
 
-        setControl(TF_result, 0, ++y, 4, 1);
+        row = 2;
+        setControl(TF_result, 0, row, maxCol, 2);
         TF_result.setHorizontalAlignment(JTextField.RIGHT);
+        TF_result.setFont(new Font(font.getName(), font.getStyle(), font.getSize() * 2));
 
         // 按键区第1行
-        setControl(B_copy, 1, ++y, 1, 1);
+        row = 4;
+        setControl(B_copy, 1, row, 1, 1);
         B_copy.setActionCommand("Copy");
-        B_copy.setToolTipText(CalculatorBundle.message("ui.CopyButtonToolTipText"));
+        B_copy.setToolTipText(CalculatorBundle.message("ui.CopyButton.ToolTipText"));
 
-        setControl(B_clear, 2, y, 1, 1);
-        B_clear.setToolTipText(CalculatorBundle.message("ui.ClearButtonToolTipText"));
+        setControl(B_clear, 2, row, 1, 1);
+        B_clear.setActionCommand("C");
+        B_clear.setToolTipText(CalculatorBundle.message("ui.ClearButton.ToolTipText"));
 
-        setControl(B_backspace, 3, y, 1, 1);
-        B_backspace.setActionCommand("←");
-        B_backspace.setToolTipText(CalculatorBundle.message("ui.BackspaceButtonToolTipText"));
+        setControl(B_backspace, 3, row, 1, 1);
+        B_backspace.setActionCommand("backspace");
 
         // 第2行
-        setControl(B_random, 0, ++y, 1, 1);
-        B_random.setToolTipText(CalculatorBundle.message("ui.RandomButtonToolTipText"));
-        setControl(B_pow, 1, y, 1, 1);
-        setControl(B_sqrt, 2, y, 1, 1);
-        setControl(B_mod, 3, y, 1, 1);
+        ++row;
+        setControl(B_random, 0, row, 1, 1);
+        B_random.setToolTipText(CalculatorBundle.message("ui.RandomButton.ToolTipText"));
+        setControl(B_pow, 1, row, 1, 1);
+        setControl(B_sqrt, 2, row, 1, 1);
+        setControl(B_mod, 3, row, 1, 1);
         // 第3行
-        setControl(B_leftBracket, 0, ++y, 1, 1);
-        setControl(B_rightBracket, 1, y, 1, 1);
-        setControl(B_factorial, 2, y, 1, 1);
-        setControl(B_div, 3, y, 1, 1);
+        ++row;
+        setControl(B_leftBracket, 0, row, 1, 1);
+        setControl(B_rightBracket, 1, row, 1, 1);
+        setControl(B_factorial, 2, row, 1, 1);
+        setControl(B_div, 3, row, 1, 1);
         // 第4行
-        setControl(B_7, 0, ++y, 1, 1);
-        setControl(B_8, 1, y, 1, 1);
-        setControl(B_9, 2, y, 1, 1);
-        setControl(B_mul, 3, y, 1, 1);
+        ++row;
+        setControl(B_7, 0, row, 1, 1);
+        setControl(B_8, 1, row, 1, 1);
+        setControl(B_9, 2, row, 1, 1);
+        setControl(B_mul, 3, row, 1, 1);
         // 第5行
-        setControl(B_4, 0, ++y, 1, 1);
-        setControl(B_5, 1, y, 1, 1);
-        setControl(B_6, 2, y, 1, 1);
-        setControl(B_dec, 3, y, 1, 1);
+        ++row;
+        setControl(B_4, 0, row, 1, 1);
+        setControl(B_5, 1, row, 1, 1);
+        setControl(B_6, 2, row, 1, 1);
+        setControl(B_dec, 3, row, 1, 1);
         // 第6行
-        setControl(B_1, 0, ++y, 1, 1);
-        setControl(B_2, 1, y, 1, 1);
-        setControl(B_3, 2, y, 1, 1);
-        setControl(B_add, 3, y, 1, 1);
+        ++row;
+        setControl(B_1, 0, row, 1, 1);
+        setControl(B_2, 1, row, 1, 1);
+        setControl(B_3, 2, row, 1, 1);
+        setControl(B_add, 3, row, 1, 1);
         // 第7行
-        setControl(B_0, 1, ++y, 1, 1);
-        setControl(B_point, 2, y, 1, 1);
-        setControl(B_equal, 3, y, 1, 1);
-//        JBColor color = new JBColor(new Color(76, 193, 255), Color.WHITE);
-//        B_equal.setBackground(color);
-//        B_equal.setOpaque(true);
-//        B_equal.setBorderPainted(false);
+        ++row;
+        setControl(B_0, 1, row, 1, 1);
+        setControl(B_point, 2, row, 1, 1);
+        setControl(B_equal, 3, row, 1, 1);
 
         setupControls();
     }
@@ -197,11 +201,7 @@ public class CalculatorKeyArea extends JPanel {
                     insertChar = str;
                     break;
                 case "=": // 计算结果
-                    if (inputString.length() > 0) {
-                        Expression expression = new Expression(inputString);
-                        double v = expression.calculate();
-                        TF_result.setText(String.valueOf(v));
-                    }
+                    calcAndSetResult(inputString);
                     break;
                 case "Copy": // 复制输入输出
                     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -212,7 +212,7 @@ public class CalculatorKeyArea extends JPanel {
                     TF_expression.setText("");
                     TF_result.setText("");
                     break;
-                case "←": // 退格，清除一位输入
+                case "backspace": // 退格，清除一位输入
                     if (inputString.length() > 0) {
                         int index = TF_expression.getCaretPosition();
                         if (0 < index && index <= inputString.length()) {
@@ -255,5 +255,21 @@ public class CalculatorKeyArea extends JPanel {
                 TF_expression.replaceSelection(insertChar);
             }
         }
+
+        void calcAndSetResult(String inputString) {
+            if (inputString.length() > 0) {
+                Expression expression = new Expression(inputString);
+                double v = expression.calculate();
+                String vStr = String.valueOf(v);
+                if (vStr.endsWith(".0")) {
+                    vStr = vStr.substring(0, vStr.length() - 2);
+                }
+                TF_result.setText(vStr);
+            }
+        }
+    }
+
+    public JTextField getExpression() {
+        return TF_expression;
     }
 }
