@@ -3,7 +3,14 @@
 # Calculator Changelog
 
 ## [Unreleased]
+
+### Changed
+- Upgrade Gradle Wrapper to `8.1`
+- Merged `JetBrains/intellij-platform-plugin-template` Tag `v1.6.0`
+
+## [0.0.2] - 2023-04-05
 清明时节雨纷纷
+
 ### Added
 - Added documentation, "All Built-in Tokens"
 
@@ -16,5 +23,6 @@
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 - Initial release
 
-[Unreleased]: https://github.com/burtbai/intellij-plugin-calculator/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/burtbai/intellij-plugin-calculator/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/burtbai/intellij-plugin-calculator/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/burtbai/intellij-plugin-calculator/commits/v0.0.1
