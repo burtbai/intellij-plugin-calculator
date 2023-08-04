@@ -5,8 +5,9 @@
 ## [Unreleased]
 
 ### Changed
-- Upgrade Gradle Wrapper to `8.1`
-- Merged `JetBrains/intellij-platform-plugin-template` Tag `v1.6.0`
+- Support IntelliJ Platform 232
+- Upgrade Java `17`, Gradle Wrapper `8.2.1` 
+- Merged `JetBrains/intellij-platform-plugin-template` Tag `v1.9.0`
 
 ## [0.0.2] - 2023-04-05
 清明时节雨纷纷
