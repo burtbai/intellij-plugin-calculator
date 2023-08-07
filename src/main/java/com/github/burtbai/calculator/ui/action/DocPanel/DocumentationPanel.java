@@ -30,10 +30,9 @@ public class DocumentationPanel extends JBPanel<DocumentationPanel> {
     DocumentationTableModel tableModel;
     private TableRowSorter<DocumentationTableModel> sorter;
     private JBTable myDocTable;
-    private JBScrollPane scrollPane;
 
     private JBPopup myJBPopup;
-    private JTextField myExpressionTextField;
+    private final JTextField myExpressionTextField;
 
     public DocumentationPanel(JTextField expressionTextField) {
         myExpressionTextField = expressionTextField;
@@ -64,7 +63,7 @@ public class DocumentationPanel extends JBPanel<DocumentationPanel> {
         myDocTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         fitTableColumns(myDocTable, myDocTable.getWidth());
 
-        scrollPane = new JBScrollPane(myDocTable);
+        JBScrollPane scrollPane = new JBScrollPane(myDocTable);
 
         this.add(mySearchTextField, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);

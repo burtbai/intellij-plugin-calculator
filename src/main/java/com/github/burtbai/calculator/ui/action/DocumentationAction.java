@@ -19,7 +19,7 @@ import java.awt.*;
 public class DocumentationAction extends DumbAwareAction {
     private static final Logger LOG = Logger.getInstance(DocumentationAction.class);
 
-    private JTextField myExpressionTextField;
+    private final JTextField myExpressionTextField;
 
     public DocumentationAction(JTextField expressionTextField) {
         super(() -> CalculatorBundle.message("ui.DocumentationAction.description"), AllIcons.Toolwindows.Documentation);
@@ -39,7 +39,7 @@ public class DocumentationAction extends DumbAwareAction {
                 .setFocusable(true)
                 .setResizable(true)
                 .setMovable(true)
-                .setTitle(CalculatorBundle.message("ui.DocumentationAction.description"))
+                .setTitle(CalculatorBundle.message("ui.DocumentationAction.title"))
                 .createPopup();
         docPanel.setJBPopup(popup);
         popup.showInFocusCenter();

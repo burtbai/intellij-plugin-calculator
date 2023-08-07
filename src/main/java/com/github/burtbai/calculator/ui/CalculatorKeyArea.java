@@ -16,47 +16,47 @@ import java.awt.event.ActionListener;
  * @author burtbai
  */
 public class CalculatorKeyArea extends JPanel {
-    private GridBagConstraints gridBagConstraints = new GridBagConstraints(); // 实例化该对象用来对组件进行管理
-    private GridBagLayout gridBagLayout = new GridBagLayout(); //实例化布局对象, 网格袋布局
+    private final GridBagConstraints gridBagConstraints = new GridBagConstraints(); // 实例化该对象用来对组件进行管理
+    private final GridBagLayout gridBagLayout = new GridBagLayout(); //实例化布局对象, 网格袋布局
 
     // 表达式, 输入行
-    private JTextField TF_expression = new JTextField("");
+    private final JTextField TF_expression = new JTextField("");
     // 结果, 输出行
-    private JTextField TF_result = new TextFieldWithIcon(AllIcons.Vcs.Equal);
+    private final JTextField TF_result = new TextFieldWithIcon(AllIcons.Vcs.Equal);
 
     // 第1行
-    private JButton B_copy = new JButton(AllIcons.Actions.Copy); // 复制输入输出
-    private JButton B_clear = new JButton(AllIcons.Actions.GC); // 清空输入输出
-    private JButton B_backspace = new JButton(CalculatorIcons.Backspace); // 退格，清除输入的最后一位
+    private final JButton B_copy = new JButton(AllIcons.Actions.Copy); // 复制输入输出
+    private final JButton B_clear = new JButton(AllIcons.Actions.GC); // 清空输入输出
+    private final JButton B_backspace = new JButton(CalculatorIcons.Backspace); // 退格，清除输入的最后一位
     // 第2行
-    private JButton B_random = new JButton("Random"); // 随机变量, U{0,10²}
-    private JButton B_pow = new JButton("x^n"); // x的n次方
-    private JButton B_sqrt = new JButton("2√x"); // 开根号
-    private JButton B_mod = new JButton("Mod"); // 取余
+    private final JButton B_random = new JButton("Random"); // 随机变量, U{0,10²}
+    private final JButton B_pow = new JButton("x^n"); // x的n次方
+    private final JButton B_sqrt = new JButton("2√x"); // 开根号
+    private final JButton B_mod = new JButton("Mod"); // 取余
     // 第3行
-    private JButton B_leftBracket = new JButton("("); // 混合运算的左括号
-    private JButton B_rightBracket = new JButton(")"); // 混合运算的右括号
-    private JButton B_factorial = new JButton("n!"); // 阶乘
-    private JButton B_div = new JButton("/"); // 除号
+    private final JButton B_leftBracket = new JButton("("); // 混合运算的左括号
+    private final JButton B_rightBracket = new JButton(")"); // 混合运算的右括号
+    private final JButton B_factorial = new JButton("n!"); // 阶乘
+    private final JButton B_div = new JButton("/"); // 除号
     //第4行
-    private JButton B_7 = new JButton("7"); // 数字7
-    private JButton B_8 = new JButton("8"); // 数字8
-    private JButton B_9 = new JButton("9"); // 数字9
-    private JButton B_mul = new JButton("*"); // 乘号
+    private final JButton B_7 = new JButton("7"); // 数字7
+    private final JButton B_8 = new JButton("8"); // 数字8
+    private final JButton B_9 = new JButton("9"); // 数字9
+    private final JButton B_mul = new JButton("*"); // 乘号
     //第5行
-    private JButton B_4 = new JButton("4"); // 数字4
-    private JButton B_5 = new JButton("5"); // 数字5
-    private JButton B_6 = new JButton("6"); // 数字6
-    private JButton B_dec = new JButton("-"); // 减号
+    private final JButton B_4 = new JButton("4"); // 数字4
+    private final JButton B_5 = new JButton("5"); // 数字5
+    private final JButton B_6 = new JButton("6"); // 数字6
+    private final JButton B_dec = new JButton("-"); // 减号
     //第6行
-    private JButton B_1 = new JButton("1"); // 数字1
-    private JButton B_2 = new JButton("2"); // 数字2
-    private JButton B_3 = new JButton("3"); // 数字3
-    private JButton B_add = new JButton("+"); // 加号
+    private final JButton B_1 = new JButton("1"); // 数字1
+    private final JButton B_2 = new JButton("2"); // 数字2
+    private final JButton B_3 = new JButton("3"); // 数字3
+    private final JButton B_add = new JButton("+"); // 加号
     //第7行
-    private JButton B_0 = new JButton("0"); // 数字0
-    private JButton B_point = new JButton("."); // 小数点
-    private JButton B_equal = new JButton("="); // 等号
+    private final JButton B_0 = new JButton("0"); // 数字0
+    private final JButton B_point = new JButton("."); // 小数点
+    private final JButton B_equal = new JButton("="); // 等号
 
     public CalculatorKeyArea() {
         Font font = this.getFont();
@@ -179,41 +179,21 @@ public class CalculatorKeyArea extends JPanel {
             String str = e.getActionCommand();
             String insertChar = "";
             switch (str) {
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                case ".":
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                case "(":
-                case ")":
-                case "e":
-                case "π":
-                    insertChar = str;
-                    break;
-                case "=": // 计算结果
-                    calcAndSetResult(inputString);
-                    break;
-                case "Copy": // 复制输入输出
+                case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "+", "-", "*", "/", "(", ")", "e", "π" ->
+                        insertChar = str;
+                case "=" -> // 计算结果
+                        calcAndSetResult(inputString);
+                case "Copy" -> { // 复制输入输出
                     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                     StringSelection selection = new StringSelection(inputString + " = " + outputString);
                     clipboard.setContents(selection, null);
-                    break;
-                case "C": // 清空输入输出
+                }
+                case "C" -> { // 清空输入输出
                     TF_expression.setText("");
                     TF_result.setText("");
-                    break;
-                case "backspace": // 退格，清除一位输入
-                    if (inputString.length() > 0) {
+                }
+                case "backspace" -> { // 退格，清除一位输入
+                    if (!inputString.isEmpty()) {
                         int index = TF_expression.getCaretPosition();
                         if (0 < index && index <= inputString.length()) {
                             inputString = inputString.substring(0, index - 1) + inputString.substring(index);
@@ -223,41 +203,33 @@ public class CalculatorKeyArea extends JPanel {
                             }
                         }
                     }
-                    break;
-                case "Mod": // 取余，运算符符号为"#"，按键显示为"Mod"
-                    insertChar = "#";
-                    break;
-                case "n!": // 阶乘
-                    insertChar = "!";
-                    break;
-                case "2√x": // 2次根下x
-                    insertChar = "√";
-                    break;
-                case "x^n": // x的n次方
-                    insertChar = "^";
-                    break;
-                case "n√x": // n次根下x，需要点击“=”出结果，可以在混合运算中使用
-                    insertChar = "^(1/n)";
-                    break;
-                case "ln": // 以e为底的对数
-                    insertChar = "ln(x)";
-                    break;
-                case "e^x": // e的x次方
-                    insertChar = "exp(x)";
-                    break;
-                case "Random": // 随机数
-                    insertChar = "[nat2]";
-                    break;
-                default:
-                    break;
+                }
+                case "Mod" -> // 取余，运算符符号为"#"，按键显示为"Mod"
+                        insertChar = "#";
+                case "n!" -> // 阶乘
+                        insertChar = "!";
+                case "2√x" -> // 2次根下x
+                        insertChar = "√";
+                case "x^n" -> // x的n次方
+                        insertChar = "^";
+                case "n√x" -> // n次根下x，需要点击“=”出结果，可以在混合运算中使用
+                        insertChar = "^(1/n)";
+                case "ln" -> // 以e为底的对数
+                        insertChar = "ln(x)";
+                case "e^x" -> // e的x次方
+                        insertChar = "exp(x)";
+                case "Random" -> // 随机数
+                        insertChar = "[nat2]";
+                default -> {
+                }
             }
-            if (insertChar.length() > 0) {
+            if (!insertChar.isEmpty()) {
                 TF_expression.replaceSelection(insertChar);
             }
         }
 
         void calcAndSetResult(String inputString) {
-            if (inputString.length() > 0) {
+            if (!inputString.isEmpty()) {
                 Expression expression = new Expression(inputString);
                 double v = expression.calculate();
                 String vStr = String.valueOf(v);

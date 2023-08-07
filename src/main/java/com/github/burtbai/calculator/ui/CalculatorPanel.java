@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class CalculatorPanel extends JPanel {
 
-    private JTextField TF_expression;
+    private final JTextField TF_expression;
 
     public CalculatorPanel() {
         super(new BorderLayout(10, 10));
