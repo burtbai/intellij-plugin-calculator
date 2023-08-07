@@ -29,7 +29,7 @@ public class CalculatorPlugin implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         License.iConfirmNonCommercialUse("burtbai");
 
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+        ContentFactory contentFactory = ContentFactory.getInstance();
         CalculatorPanel calculatorPanel = new CalculatorPanel();
         Content content = contentFactory.createContent(calculatorPanel, "", false);
         toolWindow.getContentManager().addContent(content);
