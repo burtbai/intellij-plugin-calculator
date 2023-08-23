@@ -11,6 +11,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * @author burtbai
@@ -56,7 +57,7 @@ public class CalculatorKeyArea extends JPanel {
     //第7行
     private final JButton B_0 = new JButton("0"); // 数字0
     private final JButton B_point = new JButton("."); // 小数点
-    private final JButton B_equal = new JButton("="); // 等号
+    private final JButton B_enter = new JButton("="); // 等号
 
     public CalculatorKeyArea() {
         Font font = this.getFont();
@@ -124,7 +125,7 @@ public class CalculatorKeyArea extends JPanel {
         ++row;
         setControl(B_0, 1, row, 1, 1);
         setControl(B_point, 2, row, 1, 1);
-        setControl(B_equal, 3, row, 1, 1);
+        setControl(B_enter, 3, row, 1, 1);
 
         setupControls();
     }
@@ -168,7 +169,12 @@ public class CalculatorKeyArea extends JPanel {
         B_add.addActionListener(myActionListener);
         B_0.addActionListener(myActionListener);
         B_point.addActionListener(myActionListener);
-        B_equal.addActionListener(myActionListener);
+        B_enter.addActionListener(myActionListener);
+
+        B_enter.registerKeyboardAction(e -> {
+            String inputString = TF_expression.getText();
+            calcAndSetResult(inputString);
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), WHEN_IN_FOCUSED_WINDOW);
     }
 
     class MyActionListener implements ActionListener { // 实现动作Listener接口。实现里面的actionPerformed方法
@@ -227,17 +233,17 @@ public class CalculatorKeyArea extends JPanel {
                 TF_expression.replaceSelection(insertChar);
             }
         }
+    }
 
-        void calcAndSetResult(String inputString) {
-            if (!inputString.isEmpty()) {
-                Expression expression = new Expression(inputString);
-                double v = expression.calculate();
-                String vStr = String.valueOf(v);
-                if (vStr.endsWith(".0")) {
-                    vStr = vStr.substring(0, vStr.length() - 2);
-                }
-                TF_result.setText(vStr);
+    void calcAndSetResult(String inputString) {
+        if (!inputString.isEmpty()) {
+            Expression expression = new Expression(inputString);
+            double v = expression.calculate();
+            String vStr = String.valueOf(v);
+            if (vStr.endsWith(".0")) {
+                vStr = vStr.substring(0, vStr.length() - 2);
             }
+            TF_result.setText(vStr);
         }
     }
 

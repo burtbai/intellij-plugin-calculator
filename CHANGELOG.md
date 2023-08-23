@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+### Added
+- Support calculations by pressing Enter button
+
 ## [0.0.3] - 2023-08-05
 
 ### Changed
